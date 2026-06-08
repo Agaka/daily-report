@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -13,8 +14,22 @@ export function generateStaticParams() {
   }));
 }
 
-export default function BriefingPage({ params }: { params: { slug: string } }) {
-  const briefing = getBriefingBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const briefing = getBriefingBySlug(slug);
+  
+  if (!briefing) {
+    return { title: 'Relatório não encontrado' };
+  }
+
+  return {
+    title: briefing.title,
+  };
+}
+
+export default async function BriefingPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const briefing = getBriefingBySlug(slug);
 
   if (!briefing) {
     notFound();

@@ -53,6 +53,7 @@ export function getBriefingBySlug(slug: string): Briefing | null {
       content,
     };
   } catch (e) {
+    console.error('ERROR IN getBriefingBySlug for slug:', slug, e);
     return null;
   }
 }
