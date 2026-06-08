@@ -18,8 +18,15 @@ export default function BriefingPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  // Fallback to avoid Date object issues during render if any slipped through
+  const displayDate = new Date(briefing.date).toLocaleDateString('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
   return (
-    <div className="container" style={{ marginTop: '40px' }}>
+    <div className="container" style={{ marginTop: '40px', marginBottom: '80px' }}>
       <Link 
         href="/" 
         style={{ 
@@ -27,21 +34,21 @@ export default function BriefingPage({ params }: { params: { slug: string } }) {
           alignItems: 'center', 
           gap: '8px',
           color: 'var(--text-muted)',
-          marginBottom: '32px',
-          fontWeight: 500
+          marginBottom: '40px',
+          fontWeight: 600,
+          fontSize: '0.95rem'
         }}
       >
-        <ArrowLeft size={16} /> Voltar para lista
+        <ArrowLeft size={18} /> Voltar para o Radar
       </Link>
       
-      <article className="glass" style={{ padding: '40px', marginBottom: '80px' }}>
-        <header style={{ marginBottom: '40px', borderBottom: '1px solid var(--card-border)', paddingBottom: '24px' }}>
-          <div style={{ display: 'flex', gap: '16px', color: 'var(--text-muted)', marginBottom: '16px', fontSize: '0.875rem' }}>
-            <span>{new Date(briefing.date).toLocaleDateString('pt-BR')}</span>
-            {briefing.model && <span>• IA: {briefing.model}</span>}
-            {briefing.sources_count && <span>• Fontes: {briefing.sources_count}</span>}
+      <article className="glass" style={{ padding: '48px 56px', marginBottom: '80px' }}>
+        <header style={{ marginBottom: '48px', borderBottom: '1px solid var(--card-border)', paddingBottom: '32px' }}>
+          <div style={{ display: 'flex', gap: '20px', color: 'var(--text-muted)', marginBottom: '20px', fontSize: '0.95rem', fontWeight: 500 }}>
+            <span style={{ color: 'var(--primary)' }}>{displayDate}</span>
+            {briefing.sources_count && <span>• Analisado em {briefing.sources_count} fontes globais</span>}
           </div>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--foreground)', fontFamily: 'Inter, sans-serif' }}>
+          <h1 style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--foreground)', fontFamily: 'Inter, sans-serif', letterSpacing: '-0.03em', lineHeight: '1.1' }}>
             {briefing.title}
           </h1>
         </header>

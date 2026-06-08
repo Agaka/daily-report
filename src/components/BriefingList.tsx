@@ -32,7 +32,7 @@ export default function BriefingList({ briefings }: { briefings: BriefingMetadat
           <p className={styles.empty}>Nenhum relatório encontrado.</p>
         ) : (
           filtered.map((briefing) => (
-            <Link href={`/briefing/${briefing.slug}`} key={briefing.slug} className={styles.card}>
+            <Link href={`/briefing/${briefing.slug}`} key={briefing.slug} className={`${styles.card} glass`}>
               <h2>{briefing.title}</h2>
               <div className={styles.meta}>
                 <span>{new Date(briefing.date).toLocaleDateString('pt-BR')}</span>

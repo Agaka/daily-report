@@ -1,36 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 :root {
-  --background: #fdfdfc;
-  --foreground: #111827;
+  --background: #FAFAFA;
+  --foreground: #09090b;
   
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --card-border: rgba(0, 0, 0, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-hover: rgba(255, 255, 255, 0.9);
   
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
   
-  --text-muted: #6b7280;
-  --divider: #e5e7eb;
+  --text-muted: #71717a;
+  --divider: #e4e4e7;
   
-  --radius: 12px;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --radius: 16px;
+  --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  --glow: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.15), transparent 40%);
 }
 
 [data-theme="dark"] {
-  --background: #0f172a;
-  --foreground: #f8fafc;
+  --background: #0B0F19;
+  --foreground: #FAFAFA;
   
-  --card-bg: rgba(30, 41, 59, 0.6);
-  --card-border: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(17, 24, 39, 0.4);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-hover: rgba(31, 41, 55, 0.6);
   
   --primary: #60a5fa;
   --primary-hover: #93c5fd;
   
-  --text-muted: #94a3b8;
-  --divider: #334155;
+  --text-muted: #a1a1aa;
+  --divider: #27272a;
   
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  --glow: radial-gradient(circle at 50% -20%, rgba(96, 165, 250, 0.15), transparent 50%);
 }
 
 * {
@@ -41,11 +45,14 @@
 
 body {
   background-color: var(--background);
+  background-image: var(--glow);
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -58,76 +65,35 @@ a:hover {
   color: var(--primary-hover);
 }
 
-/* Glassmorphism utilities */
+/* Utils */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Glassmorphism */
 .glass {
   background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reading Typography */
-.prose {
-  font-family: 'Lora', serif;
-  font-size: 1.125rem;
-  line-height: 1.8;
-  max-width: 65ch;
-  margin: 0 auto;
+.glass:hover {
+  background: var(--card-hover);
+  border-color: rgba(96, 165, 250, 0.3);
+  transform: translateY(-2px);
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  font-family: 'Inter', sans-serif;
-  color: var(--foreground);
-  margin-top: 2em;
-  margin-bottom: 0.5em;
-  font-weight: 600;
-}
-
-.prose h1 { font-size: 2.25rem; line-height: 1.2; }
-.prose h2 { font-size: 1.875rem; }
-.prose h3 { font-size: 1.5rem; }
-
-.prose p {
-  margin-bottom: 1.5em;
-}
-
-.prose ul, .prose ol {
-  margin-bottom: 1.5em;
-  padding-left: 1.5em;
-}
-
-.prose li {
-  margin-bottom: 0.5em;
-}
-
-.prose strong {
-  font-weight: 600;
-  color: var(--foreground);
-}
-
-.prose blockquote {
-  border-left: 4px solid var(--primary);
-  padding-left: 1em;
-  margin-left: 0;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* Utils */
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
+/* Layout */
 .header {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--card-border);
-  background: var(--background);
-  position: sticky;
-  top: 0;
+  padding: 24px 0;
+  background: transparent;
+  position: relative;
   z-index: 100;
 }
 
@@ -139,16 +105,72 @@ a:hover {
 
 .logo a {
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
   color: var(--foreground);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .footer {
-  margin-top: 60px;
+  margin-top: 80px;
   padding: 40px 0;
   text-align: center;
-  border-top: 1px solid var(--card-border);
   color: var(--text-muted);
   font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Typography for Reading */
+.prose {
+  font-family: 'Lora', serif;
+  font-size: 1.18rem;
+  line-height: 1.8;
+  max-width: 65ch;
+  margin: 0 auto;
+  color: var(--foreground);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: 'Inter', sans-serif;
+  color: var(--foreground);
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.prose h1 { font-size: 2.25rem; line-height: 1.2; }
+.prose h2 { font-size: 1.75rem; }
+.prose h3 { font-size: 1.35rem; }
+
+.prose p { margin-bottom: 1.5em; }
+
+.prose ul, .prose ol {
+  margin-bottom: 1.5em;
+  padding-left: 1.2em;
+}
+
+.prose li {
+  margin-bottom: 0.6em;
+  padding-left: 0.4em;
+}
+.prose li::marker { color: var(--primary); font-weight: bold; }
+
+.prose strong {
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--primary);
+  padding: 1.5em;
+  margin: 2em 0;
+  background: var(--card-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--text-muted);
+  font-style: italic;
+  font-family: 'Inter', sans-serif;
 }

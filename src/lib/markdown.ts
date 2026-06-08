@@ -38,10 +38,16 @@ export function getBriefingBySlug(slug: string): Briefing | null {
       title = titleMatch[1];
     }
 
+    // Ensure date is always a string to prevent Next.js serialization errors
+    let dateStr = data.date || realSlug.replace('geo_', '');
+    if (data.date instanceof Date) {
+      dateStr = data.date.toISOString();
+    }
+
     return {
       slug: realSlug,
       title,
-      date: data.date || realSlug.replace('geo_', ''),
+      date: dateStr,
       model: data.model,
       sources_count: data.sources_count,
       content,
