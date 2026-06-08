@@ -4,6 +4,8 @@ import { ArrowLeft } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { getBriefingBySlug, getBriefingSlugs } from '@/lib/markdown';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const slugs = getBriefingSlugs();
   return slugs.map((slug) => ({
