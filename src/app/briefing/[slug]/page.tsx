@@ -59,13 +59,13 @@ export default async function BriefingPage({ params }: { params: Promise<{ slug:
         <ArrowLeft size={18} /> Voltar para o Radar
       </Link>
       
-      <article className="glass" style={{ padding: '48px 56px', marginBottom: '80px' }}>
-        <header style={{ marginBottom: '48px', borderBottom: '1px solid var(--card-border)', paddingBottom: '32px' }}>
-          <div style={{ display: 'flex', gap: '20px', color: 'var(--text-muted)', marginBottom: '20px', fontSize: '0.95rem', fontWeight: 500 }}>
+      <article className="glass article-wrapper">
+        <header className="article-header">
+          <div className="article-meta">
             <span style={{ color: 'var(--primary)' }}>{displayDate}</span>
             {briefing.sources_count && <span>• Analisado em {briefing.sources_count} fontes globais</span>}
           </div>
-          <h1 style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--foreground)', fontFamily: 'Inter, sans-serif', letterSpacing: '-0.03em', lineHeight: '1.1' }}>
+          <h1 className="article-title">
             {briefing.title}
           </h1>
         </header>

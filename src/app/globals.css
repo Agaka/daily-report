@@ -174,3 +174,58 @@ a:hover {
   font-style: italic;
   font-family: 'Inter', sans-serif;
 }
+
+/* Article responsive layout */
+.article-wrapper {
+  padding: 48px 56px;
+  margin-bottom: 80px;
+}
+
+.article-header {
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 32px;
+}
+
+.article-meta {
+  display: flex;
+  gap: 20px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.article-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .article-wrapper {
+    padding: 32px 24px;
+    margin-bottom: 40px;
+  }
+  .article-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+  }
+  .article-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .article-title {
+    font-size: 2.1rem;
+  }
+  .prose {
+    font-size: 1.05rem;
+  }
+  .prose h1 { font-size: 1.8rem; }
+  .prose h2 { font-size: 1.5rem; }
+  .prose h3 { font-size: 1.25rem; }
+}
