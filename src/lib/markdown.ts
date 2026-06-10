@@ -32,10 +32,13 @@ export function getBriefingBySlug(slug: string): Briefing | null {
     // We assume the date is in the frontmatter or filename
     let title = `Briefing — ${data.date || realSlug}`;
     
+    let finalContent = content;
     // Attempt to extract real title from the first # line if possible
     const titleMatch = content.match(/^#\s+(.*)/m);
     if (titleMatch) {
       title = titleMatch[1];
+      // Remove the title line so it doesn't render twice (once in header, once in markdown)
+      finalContent = content.replace(/^#\s+.*\n*/m, '');
     }
 
     // Ensure date is always a string to prevent Next.js serialization errors
@@ -50,7 +53,7 @@ export function getBriefingBySlug(slug: string): Briefing | null {
       date: dateStr,
       model: data.model,
       sources_count: data.sources_count,
-      content,
+      content: finalContent,
     };
   } catch (e) {
     console.error('ERROR IN getBriefingBySlug for slug:', slug, e);
